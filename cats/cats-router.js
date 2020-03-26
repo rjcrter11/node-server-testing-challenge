@@ -33,6 +33,9 @@ router.post("/", (req, res) => {
   const newCat = req.body;
   Cats.insert(newCat)
     .then((newCat) => {
+      if (!newCat.name || !newCat.breed) {
+        res.status(400).json({ message: "You left out some cat info" });
+      }
       res.status(201).json(newCat);
     })
     .catch((err) => {
@@ -46,7 +49,7 @@ router.delete("/:id", (req, res) => {
   Cats.remove(id)
     .then((left) => {
       if (left) {
-        res.json({ heGone: left });
+        res.json({ heGone: "Say bye" });
       } else {
         res.status(404).json({ message: "Couldnt find him to get rid of him" });
       }
