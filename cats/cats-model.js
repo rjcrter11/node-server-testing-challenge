@@ -11,7 +11,7 @@ function getAll() {
   return db("cats");
 }
 
-function getById() {
+function getById(id) {
   return db("cats")
     .where({ id })
     .first();
